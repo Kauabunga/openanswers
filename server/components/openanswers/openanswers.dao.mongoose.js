@@ -33,7 +33,28 @@ function getCompleteFormDefinition(name, version){
     getFormDefinition(name, version)
       .then(function(formDefinition){
 
+        TemplateSetModel.findByIdAsync(formDefinition.templateSetId)
+          .then(function(templateSet){
+            formDefinition.templateSet = templateSet;
+            TemplateModel.findAsync({
+                '_id': {
+                  $in: templateSet.templateIds
+                }
+              })
+              .then(function(templates){
+                templateSet.templates = templates;
+                success(formDefinition);
+              })
+              .catch(function(err){
+                console.log('Error getting templates', err);
+                return failure(err);
+              });
 
+          })
+          .catch(function(err){
+            console.log('Error getting template set', err);
+            return failure(err);
+          });
 
       })
       .catch(function(err){
@@ -59,7 +80,7 @@ function getFormDefinition(name, version){
     var formDefinitionPromise;
 
 
-    if (version) {
+    if ( version ) {
       formDefinitionPromise = FormDefinitionModel.findOneAsync({
         name: name,
         version: version
@@ -67,16 +88,18 @@ function getFormDefinition(name, version){
     }
     else {
       formDefinitionPromise = new Promise(function(success, failure){
-        FormDefinitionModel.find({name: name}).sort({dateCreated: -1}).limit(1)
+        FormDefinitionModel.find({ name: name }).sort({dateCreated: -1}).limit(1)
           .exec(function(err, formDefinition){
             if(err){
+              console.log('Could not find form definition', err);
               return failure(err);
             }
             else if(formDefinition && formDefinition[0]){
+              console.log('found form definition');
               return success(formDefinition[0]);
             }
             else {
-              console.log('Couldnt find form definition with formname and version');
+              console.log('Couldnt find form definition with formname', name);
               return failure(404);
             }
           });
@@ -85,9 +108,8 @@ function getFormDefinition(name, version){
 
     return formDefinitionPromise
       .then(function(formDefinition){
-
         if (formDefinition) {
-          // TODO ensure that at most a single form is returned
+          console.log('getFormDefinition() Found form deifinition', formDefinition.name);
           return success(formDefinition);
         }
         else {

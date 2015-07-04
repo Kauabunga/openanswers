@@ -2,26 +2,30 @@
 
 angular.module('openanswersApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+    var url = '/api/forms/testForm?callback=moooo';
+
+    window.moooo = function(formDefinition, formlyTypes){
+      console.log('formDefinition', formDefinition);
+      console.log('formlyTypes', formlyTypes);
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
+    $('body').append( getTransformationScriptElement() );
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
+    /**
+     *
+     * @param form
+     * @param module
+     */
+    function getTransformationScriptElement(){
+      var transformationScript = document.createElement( 'script' );
+      transformationScript.type = 'text/javascript';
+      transformationScript.src = url;
+      return transformationScript;
+    }
+
+
+
+
   });

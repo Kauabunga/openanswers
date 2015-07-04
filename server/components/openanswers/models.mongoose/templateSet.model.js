@@ -16,7 +16,8 @@ var TemplateSetSchema = new Schema({
 
   templateSetTransformationScript: String,
   templateSetStyleCSS: String,
-  templates: [ ObjectId ]
+  templateIds: [ ObjectId ],
+  templates: [{}]
 
 });
 

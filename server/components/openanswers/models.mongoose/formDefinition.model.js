@@ -16,14 +16,20 @@ var FormDefinitionSchema = new Schema({
   dateCreated: Date,
   version: String,
 
-  templateSet: ObjectId,
+  templateSetId: ObjectId,
+  templateSet: {},
+
+  dataType: String,
+  dataVersion: String,
 
   defaultStep: String,
   steps: [{
     name: String,
     formlyElements: [{
       key: String,
-      type: String,
+      type: {
+        type: { type: String }
+      },
       defaultValue: {},
       templateOptions: {}
     }]

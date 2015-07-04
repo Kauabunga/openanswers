@@ -8,8 +8,7 @@ var TemplateSetModel = require('./models.mongoose/templateSet.model');
 var FormDefinitionModel = require('./models.mongoose/formDefinition.model');
 
 
-
-
+//TODO this takes longer to seed that instantiating the tests
 
 /**
  *
@@ -27,11 +26,11 @@ TemplateModel.find({}).remove(function(){
 
           TemplateSetModel.createAsync(getTemplateSet(templateIds))
             .then(function(templateSet){
-              console.log('templates set seed', templateSet);
 
               FormDefinitionModel.createAsync(getFormDefinition(templateSet._id))
                 .then(function(formDefinition){
                   console.log('created form definition', formDefinition);
+                  console.log('created formDefinition.steps[0].formlyElements ', formDefinition.steps[0].formlyElements);
                 });
             });
 
@@ -46,6 +45,7 @@ TemplateModel.find({}).remove(function(){
  *
  */
 function getTemplates(){
+
   return [
     {
       name: 'basic-h1',
@@ -86,7 +86,7 @@ function getTemplates(){
       dateCreated: new Date(),
       version: '1.0.0',
 
-      templateTransformationScript: '',
+      templateTransformationScript: 'function transformation(template){template.link = function(scope){console.log("link function from transformation script")};}',
       templateStlyeCSS: '',
       formlyType: {
         name: 'basic-input',
@@ -112,7 +112,7 @@ function getTemplateSet(templateIds){
 
     templateSetTransformationScript: '',
     templateSetStyleCSS: '',
-    templates: templateIds
+    templateIds: templateIds
   }
 }
 
