@@ -12,7 +12,10 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-socket-io": "~0.6.0",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "ngstorage": "~0.3.7",
+    "angular-formly": "~6.16.1",
+    "openanswers-client-angular": "~0.1.8"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

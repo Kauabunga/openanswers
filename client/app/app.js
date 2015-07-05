@@ -5,7 +5,10 @@ angular.module('openanswersApp', [
   'ngResource',
   'ngSanitize',
   'btford.socket-io',
-  'ui.router'
+  'ui.router',
+  'ngStorage',
+  'formly',
+  'openanswers'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -42,6 +45,7 @@ angular.module('openanswersApp', [
   })
 
   .run(function ($rootScope, $location, Auth) {
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {

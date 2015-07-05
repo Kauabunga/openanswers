@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('openanswersApp')
-  .config(function ($stateProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.when('/', '/testForm//');
+
     $stateProvider
       .state('main', {
-        url: '/',
+        url: '/:currentForm/:currentStep/:currentId',
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });

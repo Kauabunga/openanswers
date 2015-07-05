@@ -134,7 +134,7 @@ function getFormDefinition(templateSetId){
         formlyElements: [
           {
             key: 'firstName',
-            type: 'input',
+            type: 'basic-input',
             defaultValue: 'Muppet',
             templateOptions: {
               label: '',

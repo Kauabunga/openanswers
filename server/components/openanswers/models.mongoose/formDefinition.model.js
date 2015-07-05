@@ -27,9 +27,7 @@ var FormDefinitionSchema = new Schema({
     name: String,
     formlyElements: [{
       key: String,
-      type: {
-        type: { type: String }
-      },
+      type: { type: String },
       defaultValue: {},
       templateOptions: {}
     }]
