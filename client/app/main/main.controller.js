@@ -7,21 +7,7 @@ angular.module('openanswersApp')
 
     var url = '/api/forms/' + $stateParams.currentForm + '?callback=formCallback';
 
-    window.formCallback = function(formDefinition, formlyTypes){
-      console.log('formDefinition', formDefinition);
-      console.log('formlyTypes', formlyTypes);
-
-
-      $openanswers.loadTemplates(formlyTypes)
-        .then(function(){
-          $scope.formDefinition = formDefinition;
-        });
-
-
-
-
-
-    };
+    window.formCallback = formCallback;
 
     $('body').append( getTransformationScriptElement() );
 
@@ -38,6 +24,22 @@ angular.module('openanswersApp')
     }
 
 
+    /**
+     *
+     * @param formDefinition
+     * @param formlyTypes
+     */
+    function formCallback(formDefinition, formlyTypes){
+      console.log('formDefinition', formDefinition);
+      console.log('formlyTypes', formlyTypes);
+
+
+      $openanswers.loadTemplates(formlyTypes)
+        .then(function(){
+          $scope.formDefinition = formDefinition;
+        });
+
+    }
 
 
 

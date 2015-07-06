@@ -16,6 +16,16 @@ var TemplateSetSchema = new Schema({
 
   templateSetTransformationScript: String,
   templateSetStyleCSS: String,
+
+
+  // TODO use this instead of templateIds for more general identifier
+  //    write tests for saving / getting from different params + validation
+  templateObjs: [
+    {
+      name: String,
+      version: String
+    }
+  ],
   templateIds: [ ObjectId ],
   templates: [{}]
 

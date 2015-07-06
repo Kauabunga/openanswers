@@ -16,11 +16,20 @@ var FormDefinitionSchema = new Schema({
   dateCreated: Date,
   version: String,
 
+
+  // TODO use this instead of templateSetId for more general identifier
+  templateSetObj: {
+    name: String,
+    version: String
+  },
   templateSetId: ObjectId,
   templateSet: {},
 
+
+  // TODO set directive data source to this type
   dataType: String,
   dataVersion: String,
+
 
   defaultStep: String,
   steps: [{

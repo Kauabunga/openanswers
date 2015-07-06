@@ -17,6 +17,16 @@ var TemplateSchema = new Schema({
   templateTransformationScript: String,
   templateStyleCSS: String,
 
+
+  formlyWrapperObjs: [
+    {
+      name: String,
+      version: String
+    }
+  ],
+  formlyWrappers: [{}],
+
+
   formlyType: {
     name: String,
     // TODO interesting case here where we need to validate that the template set contains the appropriate types

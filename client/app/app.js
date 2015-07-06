@@ -8,6 +8,7 @@ angular.module('openanswersApp', [
   'ui.router',
   'ngStorage',
   'formly',
+  'formlyBootstrap',
   'openanswers'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {

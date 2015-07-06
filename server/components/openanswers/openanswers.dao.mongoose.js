@@ -16,7 +16,23 @@ return module.exports = {
 
   getTemplate: getTemplate,
   getTemplateSet: getTemplateSet,
-  getFormDefinition: getFormDefinition
+  getFormDefinition: getFormDefinition,
+  getWrapper: undefined,
+
+  getTemplates: undefined,
+  getTemplateSets: undefined,
+  getWrappers: undefined,
+  getFormDefinitions: undefined,
+
+  createTemplate: undefined,
+  createTemplateSet: undefined,
+  createWrapper: undefined,
+  createFormDefinition: undefined,
+
+  deleteTemplate: undefined,
+  deleteTemplateSet: undefined,
+  deleteWrapper: undefined,
+  deleteFormDefinition: undefined
 };
 
 
@@ -33,8 +49,9 @@ function getCompleteFormDefinition(name, version){
     getFormDefinition(name, version)
       .then(function(formDefinition){
 
-        TemplateSetModel.findByIdAsync(formDefinition.templateSetId)
+        getTemplateSet(formDefinition.templateSetId)
           .then(function(templateSet){
+
             formDefinition.templateSet = templateSet;
             TemplateModel.findAsync({
                 '_id': {
@@ -128,18 +145,14 @@ function getFormDefinition(name, version){
 /**
  *
  */
-function getTemplateSet(){
-  return new Promise(function(success, failure){
-
-
-
-  });
+function getTemplateSet(templateSetId){
+  return TemplateSetModel.findByIdAsync(templateSetId);
 }
 
 /**
  *
  */
-function getTemplate(){
+function getTemplate(templateIds){
   return new Promise(function(success, failure){
 
 

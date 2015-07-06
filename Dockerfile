@@ -24,7 +24,7 @@ CMD ["/sbin/my_init"]
 ENV NODE_ENV production
 ENV PORT 9999
 ENV IP 127.0.0.1
-ENV MONGODB_URI mongodb://mongodb/formerfun
+ENV MONGODB_URI mongodb://mongodb/openanswers
 
 
 # disable nginx disabler
