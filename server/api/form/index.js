@@ -6,7 +6,14 @@ var controller = require('./form.controller');
 var router = express.Router();
 
 
-router.get('/:name', controller.index);
-router.get('/:name/:version', controller.index);
+router.get('/', controller.index);
+
+router.put('/', controller.updateForm);
+
+router.get('/:name', controller.getForm);
+router.get('/:name/:version', controller.getForm);
+
+
+
 
 module.exports = router;

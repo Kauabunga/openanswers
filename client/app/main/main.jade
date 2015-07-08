@@ -5,5 +5,12 @@
     .col-lg-12
 
       openanswers.openanswers-container(form-controls='formControls', form-definition='formDefinition',
-            form-model='journey', form-step-state-param='currentStep',
+            form-model='model', form-step-state-param='currentStep',
             form-id-state-param='currentId', form-submit='submitForm')
+
+
+
+
+  .row
+    .col-sm-12
+      pre {{ model | json }}

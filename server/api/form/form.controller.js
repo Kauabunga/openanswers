@@ -12,7 +12,7 @@ var openAnswersDao =     require('../../components/openanswers/openanswers.dao.m
  * @param req
  * @param res
  */
-exports.index = function(req, res) {
+exports.getForm = function(req, res) {
 
   console.log('form.controller.index()');
 
@@ -40,6 +40,41 @@ exports.index = function(req, res) {
 
 };
 
+/**
+ *
+ * @param req
+ * @param res
+ */
+exports.index = function(req, res){
+  return openAnswersDao.getFormDefinitions()
+    .then(function(forms){
+      res.status(200).json(forms);
+    })
+    .catch(function(err){
+      console.log('Error getting form definitions', err);
+      res.status(500).send();
+    })
+};
+
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+exports.updateForm = function(req, res) {
+
+  delete req.body.__v;
+
+  openAnswersDao.updateFormDefinition(req.body)
+    .then(function(updatedForm){
+      res.status(200).json(updatedForm);
+    })
+    .catch(function(err){
+      console.log('Error updating form', err);
+      res.status(500).send();
+    });
+};
 
 /**
  *

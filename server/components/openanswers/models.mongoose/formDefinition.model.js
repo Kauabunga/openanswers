@@ -38,7 +38,9 @@ var FormDefinitionSchema = new Schema({
       key: String,
       type: { type: String },
       defaultValue: {},
-      templateOptions: {}
+      templateOptions: {},
+      expressionProperties: {},
+      hideExpression: String
     }]
   }]
 });

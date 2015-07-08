@@ -1,6 +1,7 @@
 
 /* global -Promise */
 var Promise = require('bluebird');
+var _ = require('lodash');
 
 
 var TemplateModel = require('./models.mongoose/template.model');
@@ -22,7 +23,7 @@ return module.exports = {
   getTemplates: undefined,
   getTemplateSets: undefined,
   getWrappers: undefined,
-  getFormDefinitions: undefined,
+  getFormDefinitions: getFormDefinitions,
 
   createTemplate: undefined,
   createTemplateSet: undefined,
@@ -32,7 +33,9 @@ return module.exports = {
   deleteTemplate: undefined,
   deleteTemplateSet: undefined,
   deleteWrapper: undefined,
-  deleteFormDefinition: undefined
+  deleteFormDefinition: undefined,
+
+  updateFormDefinition: updateFormDefinition
 };
 
 
@@ -160,5 +163,30 @@ function getTemplate(templateIds){
   });
 }
 
+/**
+ *
+ * @returns {*}
+ */
+function getFormDefinitions(){
+  return FormDefinitionModel.findAsync({});
+}
 
+
+/**
+ *
+ * @param form
+ * @returns {*}
+ */
+function updateFormDefinition(form){
+
+  console.log('Updating form definition', form);
+
+  return FormDefinitionModel.findByIdAsync(form._id)
+    .then(function(dbForm){
+      console.log('DB form definition', arguments);
+      var updated = _.merge(dbForm, form);
+      return updated.saveAsync();
+    });
+
+}
 

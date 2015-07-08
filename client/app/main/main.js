@@ -3,7 +3,6 @@
 angular.module('openanswersApp')
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('/', '/testForm//');
 
     $stateProvider
       .state('main', {

@@ -7,6 +7,7 @@ angular.module('openanswersApp', [
   'btford.socket-io',
   'ui.router',
   'ngStorage',
+  'ngMaterial',
   'formly',
   'formlyBootstrap',
   'openanswers'
